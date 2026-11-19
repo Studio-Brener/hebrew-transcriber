@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premiere Hebrew Transcriber · תמלול בעברית לפרמייר</title>
+<meta name="description" content="פאנל לפרמייר שמזהה את הערוץ הנקי, מתמלל חומרי גלם בעברית ומכניס את התמלול ישר לקליפ, עם שמות דוברים.">
+<meta property="og:title" content="Premiere Hebrew Transcriber">
+<meta property="og:description" content="תמלול חומרי גלם בעברית, ישר לתוך הקליפ בפרמייר.">
+<meta property="og:image" content="https://transcriber.brener.info/media/poster.jpg">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e12; --bg2:#13161c; --card:#171b22; --line:#262b35; --fg:#eef1f5; --muted:#9aa3b2; --dim:#6b7383;
+  --accent:#2f7cf6; --accent-hi:#4b8ff8; --accent-soft:#16233b; --ok:#5ccf8a; --warn:#f2bf5b;
+  --font:"Heebo",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace; --r:12px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.7}
+a{color:var(--accent-hi);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:5;background:rgba(12,14,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:14px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--fg);font-weight:700;font-size:16px;direction:ltr}
+.brand img{width:30px;height:30px}
+nav{margin-inline-start:auto;display:flex;gap:22px;font-size:15px}
+nav a{color:var(--muted)}
+nav a:hover{color:var(--fg);text-decoration:none}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center;padding-top:64px;padding-bottom:40px}
+.eyebrow{color:var(--accent-hi);font-weight:500;font-size:15px;direction:ltr;text-align:right}
+h1{font-size:46px;line-height:1.15;margin:.3rem 0 1rem;font-weight:700;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent-hi)}
+.lead{color:var(--muted);font-size:19px;margin:0 0 1.6rem;max-width:34em}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;font-weight:500;font-size:17px;padding:13px 26px;border-radius:999px;border:0;cursor:pointer}
+.btn:hover{background:var(--accent-hi);text-decoration:none}
+.btn svg{width:20px;height:20px}
+.alt{font-size:15px;color:var(--muted)}
+.meta{margin-top:12px;font-size:14px;color:var(--dim)}
+.meta span+span::before{content:"·";margin:0 8px}
+.panel-art{width:100%;height:auto;display:block;filter:drop-shadow(0 20px 50px rgba(0,0,0,.45))}
+section{padding:56px 0;border-top:1px solid var(--line);scroll-margin-top:60px}
+h2{font-size:30px;line-height:1.25;margin:0 0 .5rem;font-weight:700}
+.sub{color:var(--muted);margin:0 0 1.8rem;max-width:40em}
+.video{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+.video video{width:100%;height:100%;display:block}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.card h3{margin:.6rem 0 .3rem;font-size:18px;font-weight:500}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.icon{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent-hi);display:flex;align-items:center;justify-content:center}
+.icon svg{width:20px;height:20px}
+.tabs{display:inline-flex;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:22px}
+.tabs button{background:transparent;color:var(--muted);border:0;font:inherit;font-size:15px;padding:6px 22px;border-radius:999px;cursor:pointer}
+.tabs button.on{background:var(--accent);color:#fff}
+.req{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;padding:0;list-style:none}
+.req li{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:14px;color:var(--muted)}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;gap:14px}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+ol.steps>li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent-hi);font-weight:700;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;font-weight:500}
+.steps p{margin:.2rem 0 0;color:var(--muted);font-size:15px}
+.steps ul{margin:.4rem 0 0;padding-inline-start:18px;color:var(--muted);font-size:15px}
+.ui{color:var(--fg);font-weight:500}
+.menu{direction:ltr;unicode-bidi:isolate;white-space:nowrap;color:var(--fg);font-weight:500}
+code,.path{font-family:var(--mono);font-size:13.5px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+.compare .card .tag{display:inline-block;font-size:13px;color:var(--accent-hi);background:var(--accent-soft);border-radius:999px;padding:1px 10px;margin-top:.6rem}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent-hi);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p,details ul{color:var(--muted);font-size:15px;margin:.6rem 0 0}
+.news{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px}
+.news h3{margin:0 0 .4rem;font-size:17px;font-weight:500}
+.news ul{margin:0;padding-inline-start:18px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--dim);font-size:14px}
+footer .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+footer h4{color:var(--fg);font-weight:500;margin:0 0 .4rem;font-size:15px}
+footer p{margin:0}
+footer .credits{direction:ltr;text-align:right}
+@media (max-width:860px){
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:40px;gap:28px}
+  h1{font-size:36px}
+  .grid,footer .wrap{grid-template-columns:1fr}
+  nav{display:none}
+  .menu{white-space:normal}
+  .brand{font-size:14px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><img src="img/logo.svg" alt="">Premiere Hebrew Transcriber</a>
+  <nav><a href="#video">סרטון</a><a href="#install">התקנה</a><a href="#services">שירותי תמלול</a><a href="#faq">שאלות נפוצות</a><a href="#contact">יצירת קשר</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <div class="eyebrow">Premiere Hebrew Transcriber</div>
+    <h1>תמלול חומרי גלם בעברית, <em>ישר לתוך הקליפ.</em></h1>
+    <p class="lead">פאנל לפרמייר שמזהה לבד את הערוץ הנקי, מתמלל בעברית ומכניס את התמלול לפאנל Text, עם שמות דוברים ותזמונים מדויקים. גוררים קליפים, לוחצים, ועורכים לפי טקסט.</p>
+    <div class="dl">
+      <a class="btn" id="dl-main" href="#install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dl-label">הורדה</span></a>
+      <a class="alt" id="dl-alt" href="#install"></a>
+    </div>
+    <div class="meta" id="meta"><span>למק עם מעבד Apple ול-Windows</span><span>פרמייר 25.6 ומעלה</span></div>
+  </div>
+  <svg class="panel-art" viewBox="0 0 520 400" direction="ltr" style="direction:ltr" role="img" aria-label="הפאנל בתוך פרמייר: תור קליפים בתמלול">
+    <rect width="520" height="400" rx="14" fill="#1d1f24" stroke="#30343d"/>
+    <rect width="520" height="44" rx="14" fill="#25282e"/><rect y="30" width="520" height="14" fill="#25282e"/>
+    <text x="496" y="28" text-anchor="end" fill="#eef1f5" font-family="Heebo" font-weight="700" font-size="15">תמלול חומרי גלם</text>
+    <rect x="18" y="13" width="64" height="20" rx="10" fill="#3a3e46"/><text x="50" y="28" text-anchor="middle" fill="#dfe3ea" font-family="Heebo" font-size="11">הגדרות</text>
+    <text x="96" y="28" fill="#5ccf8a" font-family="Heebo" font-size="12">מחובר</text>
+    <rect x="18" y="58" width="484" height="40" rx="6" fill="none" stroke="#4a4f59" stroke-dasharray="5 4"/>
+    <text x="260" y="83" text-anchor="middle" fill="#8b93a1" font-family="Heebo" font-size="13">גרירת קליפים מפאנל הפרויקט</text>
+    <g font-family="Heebo" font-size="13">
+      <line x1="0" y1="118" x2="520" y2="118" stroke="#30343d"/>
+      <text x="496" y="146" text-anchor="end" fill="#eef1f5" direction="ltr">INTERVIEW_A.mov</text>
+      <text x="336" y="146" text-anchor="end" fill="#8b93a1">18:40</text>
+      <rect x="196" y="131" width="96" height="22" rx="11" fill="#3a3e46"/><text x="244" y="146" text-anchor="middle" fill="#dfe3ea" font-size="11">ערוץ 2 · אוטומטי</text>
+      <text x="176" y="146" text-anchor="end" fill="#5ccf8a">הושלם ויובא</text>
+      <line x1="0" y1="168" x2="520" y2="168" stroke="#30343d"/>
+      <text x="496" y="196" text-anchor="end" fill="#eef1f5" direction="ltr">INTERVIEW_B.mov</text>
+      <text x="336" y="196" text-anchor="end" fill="#8b93a1">22:05</text>
+      <rect x="196" y="181" width="96" height="22" rx="11" fill="#3a3e46"/><text x="244" y="196" text-anchor="middle" fill="#dfe3ea" font-size="11">ערוצים 1+2 · מיקס</text>
+      <text x="176" y="192" text-anchor="end" fill="#79b4ff">מתמלל 64%</text>
+      <rect x="40" y="200" width="136" height="3" fill="#3a3e46"/><rect x="89" y="200" width="87" height="3" fill="#2f7cf6"/>
+      <line x1="0" y1="218" x2="520" y2="218" stroke="#30343d"/>
+      <text x="496" y="246" text-anchor="end" fill="#eef1f5" direction="ltr">STREET_04.mov</text>
+      <text x="336" y="246" text-anchor="end" fill="#8b93a1">06:12</text>
+      <rect x="196" y="231" width="96" height="22" rx="11" fill="#3a3e46"/><text x="244" y="246" text-anchor="middle" fill="#dfe3ea" font-size="11">ערוץ 1 · אוטומטי</text>
+      <text x="176" y="246" text-anchor="end" fill="#8b93a1">בתור</text>
+      <line x1="0" y1="268" x2="520" y2="268" stroke="#30343d"/>
+      <text x="496" y="296" text-anchor="end" fill="#eef1f5" direction="ltr">BROLL_City.mov</text>
+      <text x="336" y="296" text-anchor="end" fill="#8b93a1">03:47</text>
+      <text x="176" y="296" text-anchor="end" fill="#8b93a1">מוכן לתמלול</text>
+      <line x1="0" y1="318" x2="520" y2="318" stroke="#30343d"/>
+    </g>
+    <text x="496" y="370" text-anchor="end" fill="#8b93a1" font-family="Heebo" font-size="12">4 קליפים · 50:44 לתמלול · בערך 6 דקות</text>
+    <rect x="18" y="352" width="104" height="30" rx="15" fill="#2f7cf6"/><text x="70" y="372" text-anchor="middle" fill="#fff" font-family="Heebo" font-weight="700" font-size="13">מתמלל</text>
+  </svg>
+</div>
+
+<section id="video"><div class="wrap">
+  <h2>ככה זה נראה</h2>
+  <p class="sub">43 שניות על מה הפאנל עושה.</p>
+  <div class="video"><video controls playsinline preload="metadata" poster="media/poster.jpg"><source src="media/promo.mp4" type="video/mp4"></video></div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2>מה הוא עושה</h2>
+  <p class="sub">כל מה שצריך כדי לעבור מחומרי גלם לעריכה לפי טקסט, בלי לייצא ולייבא קבצים ידנית.</p>
+  <div class="grid">
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg></div><h3>ערוץ נקי, אוטומטית</h3><p>מנתח את כל ערוצי האודיו ובוחר את המיקרופון הצמוד, לא את מיקרופון המצלמה.</p></div>
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19a4 4 0 0 0-8 0M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6M21 19a3 3 0 0 0-4-2.8M3 19a3 3 0 0 1 4-2.8"/></svg></div><h3>שמות דוברים</h3><p>כמה מיקרופונים בקליפ? כל ערוץ מקבל שם, והתמלול מסומן לפי מי שדיבר.</p></div>
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><h3>תור לקליפים רבים</h3><p>גוררים קליפים או בוחרים "כל מה שאין לו תמלול", ומתמללים כמה במקביל.</p></div>
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>תזמונים מדויקים</h3><p>קצוות המילים מיושרים לשקטים באודיו, כך שחיתוך לפי טקסט נופל במקום.</p></div>
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4 4 0 0 1-1 9z"/></svg></div><h3>ענן או מקומי</h3><p>HappyScribe, ElevenLabs, או מודל ivrit.ai שרץ במחשב בחינם, בלי שהחומר יוצא ממנו.</p></div>
+    <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/><path d="m15 17 2 2 4-4"/></svg></div><h3>ישר לפאנל Text</h3><p>התמלול נכנס לקליפ עצמו, בקטעים של עד 20 שניות. אפשר לחפש, לסמן ולערוך לפי טקסט.</p></div>
+  </div>
+</div></section>
+
+<section id="install"><div class="wrap">
+  <h2>התקנה</h2>
+  <p class="sub">כמה דקות, בלי להתקין שום תוכנה נוספת.</p>
+  <div class="tabs" role="tablist"><button id="t-mac" class="on" role="tab">Mac</button><button id="t-win" role="tab">Windows</button></div>
+
+  <div id="p-mac">
+    <ul class="req"><li>מק עם מעבד Apple, מ-M1 ומעלה</li><li>Premiere Pro 25.6 ומעלה</li><li>כ-2GB פנויים לתמלול מקומי</li></ul>
+    <ol class="steps">
+      <li><div><b>להוריד את הקובץ ולסגור את פרמייר</b><p>הקובץ <span class="path">PremiereTranscriber-mac.ccx</span> מהכפתור למעלה.</p></div></li>
+      <li><div><b>ללחוץ לחיצה כפולה על הקובץ</b><p>Creative Cloud יפתח חלון התקנה. אם מופיעה אזהרה שהתוסף לא מגיע מ-Adobe, זה צפוי ואפשר לאשר.</p></div></li>
+      <li><div><b>לפתוח את הפאנל בפרמייר</b><p>בתפריט <span class="menu">Window → UXP Plugins → Premiere Hebrew Transcriber</span>. כדאי לעגן אותו ליד פאנל הפרויקט ולשמור את ה-Workspace.</p></div></li>
+      <li><div><b>לאשר הפעלה בפעם הראשונה</b><p>הפאנל מפעיל ברקע תוכנת עזר קטנה, שעולה רק כשהפאנל פתוח ונסגרת לבד.</p>
+        <ul><li>אם פרמייר שואל אם להפעיל אותה: לאשר ולסמן שיזכור.</li><li>אם macOS חוסם אותה: <span class="menu">System Settings → Privacy &amp; Security</span>, לגלול למטה וללחוץ <span class="ui">Open Anyway</span>.</li></ul>
+        <p>כשהכול תקין, בראש הפאנל כתוב <span class="ui">מחובר</span>.</p></div></li>
+      <li><div><b>לבחור תיקיית עבודה ושירות תמלול</b><p>ב<span class="ui">הגדרות</span>: בלשונית <span class="ui">תיקיות וקבצים</span> לבחור תיקייה, ובלשונית <span class="ui">שירותי תמלול</span> להדביק מפתח API או להוריד מודל מקומי. המפתחות נשמרים ב-Keychain של המק.</p></div></li>
+      <li><div><b>לגרור קליפים ולתמלל</b><p>לגרור קליפים מפאנל הפרויקט לפאנל וללחוץ <span class="ui">התחל תמלול</span>. אם הקבצים על כונן חיצוני, macOS ישאל פעם אחת אם לאפשר גישה.</p></div></li>
+    </ol>
+  </div>
+
+  <div id="p-win" hidden>
+    <ul class="req"><li>Windows 10 או 11, 64 ביט</li><li>Premiere Pro 25.6 ומעלה</li><li>לתמלול מקומי: מעבד משנת 2013 ומעלה</li></ul>
+    <ol class="steps">
+      <li><div><b>להוריד את הקובץ ולסגור את פרמייר</b><p>הקובץ <span class="path">PremiereTranscriber-win.ccx</span> מהכפתור למעלה.</p></div></li>
+      <li><div><b>ללחוץ לחיצה כפולה על הקובץ</b><p>Creative Cloud יפתח חלון התקנה. אם מופיעה אזהרה שהתוסף לא מגיע מ-Adobe, זה צפוי ואפשר לאשר.</p></div></li>
+      <li><div><b>לפתוח את הפאנל בפרמייר</b><p>בתפריט <span class="menu">Window → UXP Plugins → Premiere Hebrew Transcriber</span>. כדאי לעגן אותו ליד פאנל הפרויקט ולשמור את ה-Workspace.</p></div></li>
+      <li><div><b>לאשר הפעלה בפעם הראשונה</b><p>הפאנל מפעיל ברקע תוכנת עזר קטנה (<span class="path">PremiereTranscriberHelper.exe</span>), שלא פותחת חלון ונסגרת לבד.</p>
+        <ul><li>אם פרמייר שואל אם להפעיל אותה: לאשר ולסמן שיזכור.</li><li>אם מופיע מסך כחול <span class="menu">Windows protected your PC</span>: ללחוץ <span class="menu">More info</span> ואז <span class="menu">Run anyway</span>.</li><li>אם אנטי-וירוס חוסם אותה: לאשר אותה בתוכנה.</li></ul>
+        <p>כשהכול תקין, בראש הפאנל כתוב <span class="ui">מחובר</span>.</p></div></li>
+      <li><div><b>לבחור תיקיית עבודה ושירות תמלול</b><p>ב<span class="ui">הגדרות</span>: בלשונית <span class="ui">תיקיות וקבצים</span> לבחור תיקייה, ובלשונית <span class="ui">שירותי תמלול</span> להדביק מפתח API או להוריד מודל מקומי. המפתחות נשמרים במנהל האישורים של Windows.</p></div></li>
+      <li><div><b>לגרור קליפים ולתמלל</b><p>לגרור קליפים מפאנל הפרויקט לפאנל וללחוץ <span class="ui">התחל תמלול</span>.</p></div></li>
+    </ol>
+  </div>
+</div></section>
+
+<section id="services" class="compare"><div class="wrap">
+  <h2>איזה שירות תמלול לבחור?</h2>
+  <p class="sub">מספיק אחד. אפשר להחליף בכל קליפ, מהתפריט בפאנל.</p>
+  <div class="grid">
+    <div class="card"><h3>ElevenLabs</h3><p>מהיר, עם זיהוי דוברים. בתשלום לפי שימוש, והפאנל מראה כמה קרדיט נשאר.</p><span class="tag">ענן</span></div>
+    <div class="card"><h3>HappyScribe</h3><p>תמלול איכותי בעברית, בתשלום לפי דקות. היתרה מופיעה באתר של HappyScribe.</p><span class="tag">ענן</span></div>
+    <div class="card"><h3>ivrit.ai · מקומי</h3><p>חינמי, והחומר לא יוצא מהמחשב. מורידים מודל פעם אחת (1.6GB). במק עם מעבד Apple הוא הכי מהיר מכולם. בווינדוז הוא רץ על המעבד בלבד ואיטי יותר.</p><span class="tag">חינם ופרטי</span></div>
+  </div>
+</div></section>
+
+<section id="news-sec"><div class="wrap">
+  <h2>מה חדש</h2>
+  <div class="news" id="news"><h3 id="news-title">הגרסה האחרונה</h3><ul id="news-list"><li>הגדרות שנפתחות מיד, עם גלילה ולשונית "אודות".</li><li>גרסה ראשונה ל-Windows.</li></ul></div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>שאלות נפוצות</h2>
+  <details><summary>בראש הפאנל כתוב "לא מחובר"</summary><p>מערכת ההפעלה או אנטי-וירוס חסמו את תוכנת העזר. חוזרים לשלב 4 בהתקנה, סוגרים ופותחים את הפאנל. אם זה לא עוזר, שולחים את קובץ היומן (ראו למטה).</p></details>
+  <details><summary>לקליפ כבר יש תמלול</summary><p>הפאנל לא דורס תמלול קיים. כדי לתמלל שוב מסמנים <span class="ui">תמלל גם קליפים מתומללים</span>, ואז מייבאים את הקובץ מתיקיית העבודה דרך <span class="menu">Text → … → Import Transcript</span>. פעולה זו אפשר לבטל עם Cmd+Z או Ctrl+Z.</p></details>
+  <details><summary>איפה נשמרים הקבצים?</summary><p>רק בתיקיית העבודה שבוחרים בהגדרות, בתיקייה לכל פרויקט ולכל קליפ. אפשר לבחור שקובצי האודיו יימחקו אחרי תמלול מוצלח, כדי לחסוך מקום.</p></details>
+  <details><summary>מה עם פרטיות?</summary><p>האודיו נשלח רק לשירות שבחרת. בתמלול מקומי הוא לא יוצא מהמחשב. תוכנת העזר זמינה רק מתוך המחשב עצמו, ומפתחות ה-API נשמרים במאגר הסיסמאות של המערכת.</p></details>
+  <details><summary>איך מעדכנים לגרסה חדשה?</summary><p>מורידים את הקובץ החדש מהדף הזה ופותחים אותו. Creative Cloud מחליף את הגרסה הקיימת, וההגדרות נשמרות. הגרסה המותקנת מופיעה בהגדרות של הפאנל.</p></details>
+  <details><summary>מה לשלוח אם משהו לא עובד?</summary><p>צילום מסך של הפאנל, גרסת המערכת, ואת קובץ היומן:</p><ul><li>Mac: <span class="path">~/Library/Logs/premiere-transcriber.log</span></li><li>Windows: <span class="path">%LOCALAPPDATA%\Premiere Transcriber\helper.log</span></li></ul></details>
+</div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <div><h4>Premiere Hebrew Transcriber</h4><p>© 2026 אריאל ברנר. כל הזכויות שמורות. לשימוש אישי בלבד, ואסור להפיץ או למכור את הכלי.</p></div>
+  <div><h4>יצירת קשר</h4><p>הערות, תקלות והצעות: <a href="mailto:studio@brener.info?subject=Premiere%20Hebrew%20Transcriber">studio@brener.info</a></p></div>
+  <div><h4>רכיבי קוד פתוח</h4><p class="credits">FFmpeg · LGPL 2.1<br>Python · PSF License<br>whisper.cpp · MIT<br>ivrit.ai models · Apache 2.0</p></div>
+</div></footer>
+
+<script>
+(function () {
+  var REPO = "Studio-Brener/hebrew-transcriber";
+  var FILES = { mac: "PremiereTranscriber-mac.ccx", win: "PremiereTranscriber-win.ccx" };
+  var NAMES = { mac: "Mac", win: "Windows" };
+  var latest = "https://github.com/" + REPO + "/releases/latest/download/";
+  var ua = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || "";
+  var os = /win/i.test(ua) ? "win" : "mac";
+  var sizes = {};
+  function mb(n) { return (Math.round(n / 1e5) / 10) + "MB"; }
+  function setOS(o) {
+    os = o;
+    var other = o === "mac" ? "win" : "mac";
+    document.getElementById("dl-main").href = latest + FILES[o];
+    document.getElementById("dl-label").textContent = "הורדה ל-" + NAMES[o] + (sizes[o] ? " · " + mb(sizes[o]) : "");
+    var alt = document.getElementById("dl-alt");
+    alt.textContent = "להורדה ל-" + NAMES[other];
+    alt.href = latest + FILES[other];
+    document.getElementById("t-mac").className = o === "mac" ? "on" : "";
+    document.getElementById("t-win").className = o === "win" ? "on" : "";
+    document.getElementById("p-mac").hidden = o !== "mac";
+    document.getElementById("p-win").hidden = o !== "win";
+  }
+  document.getElementById("t-mac").onclick = function () { setOS("mac"); };
+  document.getElementById("t-win").onclick = function () { setOS("win"); };
+  setOS(os);
+  fetch("https://api.github.com/repos/" + REPO + "/releases/latest").then(function (r) { return r.ok ? r.json() : null; }).then(function (rel) {
+    if (!rel) return;
+    (rel.assets || []).forEach(function (a) { for (var k in FILES) if (a.name === FILES[k]) sizes[k] = a.size; });
+    var v = String(rel.tag_name || "").replace(/^v/, "");
+    var d = rel.published_at ? new Date(rel.published_at) : null;
+    var meta = document.getElementById("meta");
+    var first = document.createElement("span");
+    first.textContent = "גרסה " + v + (d ? " · " + d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() : "");
+    meta.insertBefore(first, meta.firstChild);
+    setOS(os);
+    var lines = String(rel.body || "").split(/\r?\n/).map(function (s) { return s.replace(/^[-*]\s*/, "").trim(); }).filter(Boolean);
+    if (lines.length) {
+      document.getElementById("news-title").textContent = "גרסה " + v;
+      var ul = document.getElementById("news-list"); ul.textContent = "";
+      lines.forEach(function (s) { var li = document.createElement("li"); li.textContent = s; ul.appendChild(li); });
+    }
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
