@@ -41,6 +41,8 @@ h1 em{font-style:normal;color:var(--accent-hi)}
 .btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;font-weight:500;font-size:17px;padding:13px 26px;border-radius:999px;border:0;cursor:pointer}
 .btn:hover{background:var(--accent-hi);text-decoration:none}
 .btn svg{width:20px;height:20px}
+.btn .size{unicode-bidi:isolate;font-size:14px;font-weight:400;opacity:.85}
+.btn .size:empty{display:none}
 .alt{font-size:15px;color:var(--muted)}
 .meta{margin-top:12px;font-size:14px;color:var(--dim)}
 .meta span+span::before{content:"·";margin:0 8px}
@@ -109,7 +111,7 @@ footer .credits{direction:ltr;text-align:right}
     <h1>תמלול חומרי גלם בעברית, <em>ישר לתוך הקליפ.</em></h1>
     <p class="lead">פאנל לפרמייר שמזהה לבד את הערוץ הנקי, מתמלל בעברית ומכניס את התמלול לפאנל Text, עם שמות דוברים ותזמונים מדויקים. גוררים קליפים, לוחצים, ועורכים לפי טקסט.</p>
     <div class="dl">
-      <a class="btn" id="dl-main" href="#install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dl-label">הורדה</span></a>
+      <a class="btn" id="dl-main" href="#install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dl-label">הורדה</span><span id="dl-size" class="size" dir="ltr"></span></a>
       <a class="alt" id="dl-alt" href="#install"></a>
     </div>
     <div class="meta" id="meta"><span>למק עם מעבד Apple ול-Windows</span><span>פרמייר 25.6 ומעלה</span></div>
@@ -249,7 +251,8 @@ footer .credits{direction:ltr;text-align:right}
     os = o;
     var other = o === "mac" ? "win" : "mac";
     document.getElementById("dl-main").href = latest + FILES[o];
-    document.getElementById("dl-label").textContent = "הורדה ל-" + NAMES[o] + (sizes[o] ? " · " + mb(sizes[o]) : "");
+    document.getElementById("dl-label").textContent = "הורדה ל-" + NAMES[o];
+    document.getElementById("dl-size").textContent = sizes[o] ? mb(sizes[o]) : "";
     var alt = document.getElementById("dl-alt");
     alt.textContent = "להורדה ל-" + NAMES[other];
     alt.href = latest + FILES[other];
