@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<script data-goatcounter="https://heb-transcriber.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <style>
 :root{
   --bg:#0c0e12; --bg2:#13161c; --card:#171b22; --line:#262b35; --fg:#eef1f5; --muted:#9aa3b2; --dim:#6b7383;
@@ -263,6 +264,13 @@ footer .credits{direction:ltr;text-align:right}
   }
   document.getElementById("t-mac").onclick = function () { setOS("mac"); };
   document.getElementById("t-win").onclick = function () { setOS("win"); };
+  function track(name, title) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: title, event: true }); } catch (e) {}
+  }
+  document.getElementById("dl-main").addEventListener("click", function () { track("download-" + os, "הורדה ל-" + NAMES[os] + " (כפתור ראשי)"); });
+  document.getElementById("dl-alt").addEventListener("click", function () { var o = os === "mac" ? "win" : "mac"; track("download-" + o, "הורדה ל-" + NAMES[o] + " (קישור משני)"); });
+  var vid = document.querySelector("#video video"), played = false;
+  if (vid) vid.addEventListener("play", function () { if (!played) { played = true; track("video-play", "צפייה בסרטון"); } });
   setOS(os);
   fetch("https://api.github.com/repos/" + REPO + "/releases/latest").then(function (r) { return r.ok ? r.json() : null; }).then(function (rel) {
     if (!rel) return;
