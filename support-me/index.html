@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תמיכה בפרויקט · Premiere Hebrew Transcriber</title>
+<meta name="description" content="אהבת את Premiere Hebrew Transcriber? אפשר לתמוך בהמשך הפיתוח בכל סכום.">
+<meta property="og:title" content="תמיכה ב-Premiere Hebrew Transcriber">
+<meta property="og:description" content="אהבת את הכלי? אפשר לפנק בכל סכום.">
+<meta property="og:image" content="https://transcriber.brener.info/media/poster.jpg">
+<link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<script data-goatcounter="https://heb-transcriber.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<style>
+:root{
+  --bg:#0c0e12; --bg2:#13161c; --card:#171b22; --line:#262b35; --fg:#eef1f5; --muted:#9aa3b2; --dim:#6b7383;
+  --accent:#2f7cf6; --accent-hi:#4b8ff8; --accent-soft:#16233b;
+  --font:"Heebo",system-ui,sans-serif; --r:12px; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.7}
+a{color:var(--accent-hi);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--fg);font-weight:700;font-size:16px;direction:ltr}
+.brand img{width:30px;height:30px}
+.brand:hover{text-decoration:none}
+header .back{margin-inline-start:auto;font-size:15px;color:var(--muted)}
+.hero{padding-top:72px;padding-bottom:80px}
+h1{font-size:42px;line-height:1.2;margin:0 0 1rem;font-weight:700;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent-hi)}
+.lead{color:var(--muted);font-size:18px;margin:0 0 1rem;max-width:32em}
+.thanks{color:var(--fg);font-size:18px;margin:0 0 1.8rem;max-width:32em}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;font-weight:500;font-size:17px;padding:13px 28px;border-radius:999px}
+.btn:hover{background:var(--accent-hi);text-decoration:none}
+.btn svg{width:20px;height:20px}
+.note{color:var(--dim);font-size:14px;margin:14px 0 0}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--dim);font-size:14px}
+@media (max-width:760px){
+  .hero{padding-top:40px;padding-bottom:48px}
+  h1{font-size:32px}
+  .brand{font-size:14px;white-space:nowrap}
+  header .back{font-size:14px;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/"><img src="/img/logo.svg" alt="">Premiere Hebrew Transcriber</a>
+  <a class="back" href="/">לאתר התוסף</a>
+</div></header>
+
+<main class="wrap hero">
+  <div>
+    <h1>אהבת את הכלי? <em>אפשר לפנק בכל סכום.</em></h1>
+    <p class="lead">Premiere Hebrew Transcriber הוא כלי חינמי, שפותח ומתוחזק בזמן פנוי. תמיכה, גם קטנה, עוזרת להמשיך לשפר אותו: הוספת פיצ׳רים ובקשות חדשות ממשתמשים, תיקון תקלות, תמיכה בגרסאות חדשות של פרמייר ועוד.</p>
+    <p class="thanks">תודה לכל מי שתומך, וגם לכל מי שמשתמש, ממליץ לחברים ושולח הערות.</p>
+    <a class="btn" id="pay" href="https://links.payboxapp.com/Jz98CRKVf8b" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>לתמיכה דרך PayBox</a>
+    <p class="note">התשלום דרך קבוצת PayBox, בכל סכום שמתאים לך. PayBox עובד מהטלפון, ולכן במחשב יופיע קוד לסריקה.</p>
+  </div>
+</main>
+
+<footer><div class="wrap">© 2026 אריאל ברנר · הערות והצעות: <a href="mailto:studio@brener.info?subject=Premiere%20Hebrew%20Transcriber">studio@brener.info</a></div></footer>
+
+<script>
+document.getElementById("pay").addEventListener("click", function () {
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "support-paybox", title: "לחיצה על PayBox", event: true }); } catch (e) {}
+});
+</script>
+</body>
+</html>
